@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.netology.hibernate.entity.Person;
 import ru.netology.hibernate.sevice.PersonsService;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -18,4 +20,16 @@ public class PersonsController {
     public List<Person> getPersons(@RequestParam("city") String city) {
         return personsService.getPersonsByCity(city);
     }
+
+    @GetMapping("/persons/by-age")
+    public List<Person> getPersonByAge(@RequestParam("age") int age) {
+        return personsService.getPersonByAge(age);
+    }
+
+    @GetMapping("/persons/by-name-and-surname")
+    public Optional<Person> getPersonByIdentifierNameAndIdetifierSurname(@RequestParam("name") String name,
+                                                                         @RequestParam("surname") String surname) {
+        return personsService.getPersonByIdentifierNameAndIdentifierSurname(name, surname);
+    }
+
 }

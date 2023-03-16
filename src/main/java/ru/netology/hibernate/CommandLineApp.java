@@ -1,25 +1,27 @@
 package ru.netology.hibernate;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import ru.netology.hibernate.entity.Identifier;
 import ru.netology.hibernate.entity.Person;
+import ru.netology.hibernate.repository.PersonsRepositoryJPA;
 
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+@RequiredArgsConstructor
 @Component
 public class CommandLineApp implements CommandLineRunner {
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    private final PersonsRepositoryJPA personRepositoryJPA;
+
 
     @Override
     @Transactional
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         var names = List.of("Name1", "Name2", "Name3", "Name4", "Name5");
         var surnames = List.of("Surname1", "Surname2", "Surname3", "Surname4", "Surname5");
         var cities = List.of("Moscow", "Samara", "Kaluga", "Tula", "Sochi");
@@ -34,7 +36,7 @@ public class CommandLineApp implements CommandLineRunner {
                             .cityOfLiving(cities.get(random.nextInt(cities.size())))
                             .phoneNumber(phoneNumbers.get(random.nextInt(phoneNumbers.size())))
                             .build();
-                    entityManager.persist(person);
+                    personRepositoryJPA.save(person);
 
                 });
     }
