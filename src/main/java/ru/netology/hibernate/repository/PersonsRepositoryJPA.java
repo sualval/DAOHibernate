@@ -14,5 +14,7 @@ public interface PersonsRepositoryJPA extends JpaRepository<Person, Identifier> 
 
     List<Person> findAllByIdentifierAgeLessThanOrderByIdentifierAgeAsc(int age);
 
-    Optional<Person> findPersonByIdentifierNameAndIdentifierSurname(String name, String surname);
+    List<Person> findPersonByIdentifierNameAndIdentifierSurname(String name, String surname);
+
+    List<Person> findAllByIdentifierName(String name);
 }

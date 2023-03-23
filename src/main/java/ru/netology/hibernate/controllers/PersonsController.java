@@ -27,9 +27,14 @@ public class PersonsController {
     }
 
     @GetMapping("/persons/by-name-and-surname")
-    public Optional<Person> getPersonByIdentifierNameAndIdetifierSurname(@RequestParam("name") String name,
-                                                                         @RequestParam("surname") String surname) {
+    public List<Person> getPersonByIdentifierNameAndIdetifierSurname(@RequestParam("name") String name,
+                                                                     @RequestParam("surname") String surname) {
         return personsService.getPersonByIdentifierNameAndIdentifierSurname(name, surname);
+    }
+
+    @GetMapping("/persons/by-name")
+    public List<Person> getPersonByIdentifierName(@RequestParam("name") String name) {
+        return personsService.getPersonByIdentifierName(name);
     }
 
 }

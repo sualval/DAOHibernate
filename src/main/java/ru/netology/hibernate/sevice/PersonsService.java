@@ -7,7 +7,6 @@ import ru.netology.hibernate.entity.Person;
 import ru.netology.hibernate.repository.PersonsRepositoryJPA;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,8 +24,12 @@ public class PersonsService {
         return repository.findAllByIdentifierAgeLessThanOrderByIdentifierAgeAsc(age);
     }
 
-    public Optional<Person> getPersonByIdentifierNameAndIdentifierSurname(String name, String surname) {
+    public List<Person> getPersonByIdentifierNameAndIdentifierSurname(String name, String surname) {
         return repository.findPersonByIdentifierNameAndIdentifierSurname(name, surname);
+    }
+
+    public List<Person> getPersonByIdentifierName(String name) {
+        return repository.findAllByIdentifierName(name);
     }
 
 
